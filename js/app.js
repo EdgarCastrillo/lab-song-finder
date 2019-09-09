@@ -24,7 +24,21 @@ UI.serachForm.addEventListener('submit', (e) => {
     const api = new API(artist, song)
     api.getAPI()
         .then(data => {
-          console.log(data)
+          if(data.response.lyrics) {
+            // The song exists
+            const lyrics = data.response.lyrics
+            UI.divResults.textContent = lyrics
+            console.log(data)
+            
+          } else {
+            // The song doesn't exist
+            UI.divMessages.innerHTML = 'La canción no existe, prueba con otra busqueda'
+            UI.divMessages.classList.add('error')
+            setTimeout(() => {
+              UI.divMessages.innerHTML = ''
+              UI.divMessages.classList.remove('error')
+            }, 3000);
+          }
         })
   }
 
