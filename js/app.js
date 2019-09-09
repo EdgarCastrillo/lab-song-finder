@@ -1,6 +1,7 @@
 'use stric'
 
 import * as UI from './interfaz.js'
+import { API } from './api.js'
 
 console.log(UI)
 
@@ -20,6 +21,11 @@ UI.serachForm.addEventListener('submit', (e) => {
     }, 3000);
   } else {
     // Comlete form. Get Api information
+    const api = new API(artist, song)
+    api.getAPI()
+        .then(data => {
+          console.log(data)
+        })
   }
 
 })
